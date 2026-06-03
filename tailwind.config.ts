@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Jua', 'sans-serif'],
+      },
       colors: {
         sea: {
           50:  '#F0FBFA',

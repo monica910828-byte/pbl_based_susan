@@ -3,6 +3,6 @@
 
 @layer base {
   body {
-    @apply bg-sea-50 text-text-base antialiased;
+    @apply bg-[#FFFDF9] text-text-base antialiased;
   }
 }

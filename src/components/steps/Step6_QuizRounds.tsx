@@ -40,7 +40,8 @@ export function Step6_QuizRounds() {
       state.scenarioData.problemStatement,
       currentRoundIndex + 1,
       previousRoundsHistory,
-      state.level
+      state.level,
+      state.learner
     );
 
     const result = await fetchGPT({
@@ -52,6 +53,7 @@ export function Step6_QuizRounds() {
     if (result && result.questionText) {
       setActiveQuestion({
         round: currentRoundIndex + 1,
+        previousAnswerProsCons: result.previousAnswerProsCons,
         questionText: result.questionText,
         options: result.options,
         correctIndex: result.correctIndex,
@@ -128,6 +130,13 @@ export function Step6_QuizRounds() {
           Round {displayRoundNum}
         </div>
         
+        {displayData.previousAnswerProsCons && !showFeedback && (
+          <div className="mb-6 p-5 bg-sea-50 border-l-4 border-sea-400 rounded-r-xl shadow-sm text-gray-800">
+            <h4 className="font-bold text-sea-600 mb-2">이전 선택에 대한 분석</h4>
+            <p className="leading-relaxed whitespace-pre-wrap">{displayData.previousAnswerProsCons}</p>
+          </div>
+        )}
+
         <h3 className="text-2xl font-bold text-text-base mb-8 leading-snug">
           {displayData.questionText}
         </h3>

@@ -24,6 +24,7 @@ export interface PreTestQuestion {
 
 export interface QuizRound {
   round: number;
+  previousAnswerProsCons?: string;
   questionText: string;
   options: { label: string; text: string }[];
   correctIndex: number;
