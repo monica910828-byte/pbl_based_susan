@@ -33,7 +33,7 @@ export function LearningFlow() {
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <span className="text-2xl">🌊</span>
-            <h1 className="text-2xl font-bold font-serif text-sea-600">수산食 PBL 아카데미</h1>
+            <h1 className="text-2xl font-bold font-serif text-sea-600">수산식품 PBL 아카데미</h1>
           </div>
           <div className="text-sm font-bold text-text-muted bg-sea-50 px-4 py-2 rounded-full">
             {state.learner ? `${state.learner.name}님 학습 중` : '학습 준비'}

@@ -35,17 +35,20 @@ export const getRoundPrompt = (
 현재 라운드: ${roundNumber}/3
 이전 선택 이력: ${previousRounds}
 학습자 수준: ${level}
+
+중요: 반드시 5개의 선택지(A, B, C, D, E)를 제공해야 합니다. 5개 모두 명백한 오답이 아니라, 각기 다른 관점이나 상황에서 문제 해결 방안이 될 수 있는 합리적이고 타당한 방법이어야 합니다. 그 중 가장 추천하는 1가지를 correctIndex로 지정하세요.
 {
   "questionText": "이번 라운드 질문",
   "options": [
-    { "label": "A", "text": "선택지 내용" },
-    { "label": "B", "text": "선택지 내용" },
-    { "label": "C", "text": "선택지 내용" },
-    { "label": "D", "text": "선택지 내용" }
+    { "label": "A", "text": "합리적인 선택지 1" },
+    { "label": "B", "text": "합리적인 선택지 2" },
+    { "label": "C", "text": "합리적인 선택지 3" },
+    { "label": "D", "text": "합리적인 선택지 4" },
+    { "label": "E", "text": "합리적인 선택지 5" }
   ],
   "correctIndex": 0,
-  "feedbackIfCorrect": "긍정 피드백",
-  "feedbackIfWrong": "건설적 관점 제시 피드백"
+  "feedbackIfCorrect": "이 방법이 가장 추천되는 이유와 긍정적 효과 분석",
+  "feedbackIfWrong": "이 선택지도 문제 해결에 도움을 줄 수 있는 이유 및 발생할 수 있는 트레이드오프 분석"
 }`;
 };
 
@@ -60,8 +63,10 @@ export const getSummaryPrompt = (
 수준: ${level}, 주제: ${topic}
 시나리오: ${scenario}
 ${roundsHistory}
+
+중요: summary(학습 핵심 요약) 작성 시, 문제에 대해 '학습자가 선택한 답들'을 명시적으로 제시하고, 그 답들이 문제 해결에 왜 효과가 있는지에 대한 분석을 반드시 포함해 주세요.
 {
-  "summary": "학습 핵심 요약 (3~4 문장)",
+  "summary": "학습자가 선택한 답들을 나열하고 그 효과를 분석하는 결론 요약 (4~5 문장)",
   "keyLearnings": ["핵심 배움 1", "핵심 배움 2", "핵심 배움 3"],
   "practicalTips": ["실무 팁 1", "실무 팁 2", "실무 팁 3"],
   "encouragement": "${learner.name}님 맞춤 격려 메시지"

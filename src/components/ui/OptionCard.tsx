@@ -15,7 +15,7 @@ export function OptionCard({ label, text, selected, onClick, disabled = false }:
       disabled={disabled}
       className={clsx(
         'w-full text-left p-4 rounded-3xl transition-all duration-200 border-2',
-        'focus:outline-none focus:ring-4 focus:ring-sea-200',
+        'focus:outline-none',
         selected
           ? 'bg-coral-100 border-coral-400 shadow-soft transform -translate-y-1'
           : 'bg-sea-50 border-transparent hover:bg-sea-100 hover:border-sea-200 text-text-base',
