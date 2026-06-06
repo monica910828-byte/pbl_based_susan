@@ -59,6 +59,7 @@ export function SubmissionDetail() {
 [학생 정보]
 이름: ${data.learner.name}
 연령대: ${data.learner.ageGroup}
+성별: ${data.learner.gender || '알 수 없음'}
 창업단계: ${data.learner.stage}
 수준: ${data.level}
 선택 주제: ${data.topic}
@@ -176,10 +177,14 @@ ${roundsText}
                     <img src={data.characterImageUrl} alt="Character" className="max-w-full max-h-full object-contain" />
                   </div>
                 )}
-                <div className="flex-1 grid grid-cols-2 md:grid-cols-3 gap-4 bg-sea-50 p-4 rounded-xl">
+                <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-4 bg-sea-50 p-4 rounded-xl">
                   <div>
                     <div className="text-sm text-text-muted">연령대</div>
                     <div className="font-bold">{data.learner.ageGroup}</div>
+                  </div>
+                  <div>
+                    <div className="text-sm text-text-muted">성별</div>
+                    <div className="font-bold">{data.learner.gender || '정보 없음'}</div>
                   </div>
                   <div>
                     <div className="text-sm text-text-muted">창업단계</div>
