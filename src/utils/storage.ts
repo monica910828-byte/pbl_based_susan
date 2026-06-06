@@ -2,7 +2,8 @@ import { ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { storage } from '../lib/firebase';
 
 export async function uploadBase64Image(dataUrl: string, path: string): Promise<string> {
-  if (!storage) {
+  // firebase.ts에서 실패 시 storage를 {}로 할당하므로 Object.keys 체크 추가
+  if (!storage || Object.keys(storage).length === 0) {
     console.warn("Storage is not initialized. Falling back to data URL.");
     return dataUrl;
   }

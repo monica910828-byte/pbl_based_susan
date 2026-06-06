@@ -4,6 +4,7 @@ import { useGPT } from '../../hooks/useGPT';
 import { getSummaryPrompt } from '../../utils/prompts';
 import { LoadingSpinner } from '../ui/LoadingSpinner';
 import { submitLearningData } from '../../services/submissionService';
+import { uploadBase64Image } from '../../utils/storage';
 
 export function Step7_Summary() {
   const { state, dispatch } = useLearner();
@@ -51,7 +52,6 @@ export function Step7_Summary() {
     setSubmitting(true);
     try {
       // 1. Storage에 Base64 이미지 업로드 후 URL로 교체 (Firestore 1MB 용량 제한 해결)
-      const { uploadBase64Image } = await import('../../utils/storage');
       let finalState = { ...state };
       
       if (finalState.characterImageUrl && finalState.characterImageUrl.startsWith('data:image')) {
