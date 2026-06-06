@@ -188,10 +188,10 @@ export function Step6_QuizRounds() {
         <ProgressBar current={displayRoundNum} total={3} />
       </div>
 
-      {/* 2.5D RPG 여정 맵 컨테이너 */}
+      {/* 2.5D RPG 여정 맵 컨테이너 (모바일에서 대화창이 잘리지 않도록 min-h 지정, aspect ratio 제거하여 높이 유동성 확보) */}
       <div 
-        className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-sea-200 flex flex-col bg-cover bg-center" 
-        style={{ aspectRatio: '16/10', backgroundImage: 'url(/images/map_bg.png)' }}
+        className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-sea-200 flex flex-col bg-cover bg-top min-h-[750px] md:min-h-[700px]" 
+        style={{ backgroundImage: 'url(/images/map_bg.png)' }}
       >
         
         {/* 거점 마커 표시 */}
@@ -219,9 +219,9 @@ export function Step6_QuizRounds() {
           </div>
         )}
 
-        {/* 하단 귀여운 대화창 영역 */}
+        {/* 하단 귀여운 대화창 영역 (절대위치가 아닌 문서 흐름에 두어 높이 자동 확장) */}
         {displayData && (
-          <div className="absolute bottom-0 left-0 w-full z-40 p-3 sm:p-6 bg-gradient-to-t from-black/60 to-transparent pt-12">
+          <div className="mt-auto w-full z-40 p-3 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-24 sm:pt-32 relative">
             
             {/* 이전 선택 상황 피드백(퀘스트 업데이트 느낌) */}
             {displayData.previousAnswerProsCons && !showFeedback && (
