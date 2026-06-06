@@ -17,6 +17,15 @@ export function Step7_Summary() {
     }
   }, []);
 
+  // 박수 효과음 재생
+  useEffect(() => {
+    if (state.summaryData) {
+      const sfx = new Audio('/audio/sfx_applause.ogg');
+      sfx.volume = 0.5;
+      sfx.play().catch(e => console.warn('Applause SFX play failed:', e));
+    }
+  }, [state.summaryData]);
+
   const generateSummary = async () => {
     if (!state.learner || !state.level || !state.topic || !state.scenarioData) return;
 
@@ -41,7 +50,27 @@ export function Step7_Summary() {
   const handleSubmit = async () => {
     setSubmitting(true);
     try {
-      await submitLearningData(state);
+      // 1. Storage에 Base64 이미지 업로드 후 URL로 교체 (Firestore 1MB 용량 제한 해결)
+      const { uploadBase64Image } = await import('../../utils/storage');
+      let finalState = { ...state };
+      
+      if (finalState.characterImageUrl && finalState.characterImageUrl.startsWith('data:image')) {
+        const path = `characters/${Date.now()}_${Math.random().toString(36).substring(7)}.png`;
+        finalState.characterImageUrl = await uploadBase64Image(finalState.characterImageUrl, path);
+      }
+
+      const newRounds = await Promise.all(finalState.rounds.map(async (r) => {
+        if (r.actionImageUrl && r.actionImageUrl.startsWith('data:image')) {
+          const path = `actions/${Date.now()}_${Math.random().toString(36).substring(7)}.png`;
+          const url = await uploadBase64Image(r.actionImageUrl, path);
+          return { ...r, actionImageUrl: url };
+        }
+        return r;
+      }));
+      finalState.rounds = newRounds;
+
+      // 2. 최종 데이터 제출
+      await submitLearningData(finalState);
       setIsCompleted(true);
     } catch (err) {
       alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');

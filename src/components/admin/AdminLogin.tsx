@@ -3,6 +3,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import { useNavigate } from 'react-router-dom';
 
+import { Link } from 'react-router-dom';
+
 export function AdminLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,11 +29,14 @@ export function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-sea-50 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-sea-50 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
+      <Link to="/" className="absolute top-8 left-8 text-sea-600 hover:text-sea-800 font-bold flex items-center transition-colors">
+        ← 메인으로 돌아가기
+      </Link>
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-3xl shadow-soft animate-fadeInUp">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-sea-600 font-serif">
-            관리자 로그인
+            교사 로그인
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>

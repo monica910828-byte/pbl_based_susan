@@ -21,7 +21,7 @@ export function Step2_PreTest() {
     if (!state.learner) return;
     const prompt = getPreTestPrompt(state.learner);
     const result = await fetchGPT({
-      systemPrompt: '당신은 수산식품 가공업체 교육 전문가입니다.\n학습자 정보를 바탕으로 사전지식 테스트 5문항을 생성하세요.\n반드시 다음 JSON 스키마 형식으로만 응답하세요.',
+      systemPrompt: '당신은 수산식품 가공업체 교육 전문가입니다.\n학습자 정보를 바탕으로 사전지식 테스트 3문항을 생성하세요.\n반드시 다음 JSON 스키마 형식으로만 응답하세요.',
       userPrompt: prompt,
       jsonMode: true,
     });
@@ -37,7 +37,7 @@ export function Step2_PreTest() {
       payload: { index: currentIndex, answerIndex: optionIndex },
     });
 
-    if (currentIndex < 4) {
+    if (currentIndex < 2) {
       setTimeout(() => {
         setCurrentIndex(prev => prev + 1);
       }, 400);
@@ -70,7 +70,7 @@ export function Step2_PreTest() {
   return (
     <div className="w-full max-w-3xl mx-auto animate-fadeInUp">
       <div className="mb-8">
-        <ProgressBar current={currentIndex + 1} total={5} />
+        <ProgressBar current={currentIndex + 1} total={3} />
       </div>
 
       <div className="bg-white rounded-3xl p-8 shadow-soft">

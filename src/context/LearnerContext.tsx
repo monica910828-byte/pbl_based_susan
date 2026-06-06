@@ -12,6 +12,7 @@ type Action =
   | { type: 'SET_ROUNDS'; payload: QuizRound[] }
   | { type: 'UPDATE_ROUND_ANSWER'; payload: { roundIndex: number; selectedIndex: number } }
   | { type: 'SET_SUMMARY'; payload: SummaryData }
+  | { type: 'SET_CHARACTER_IMAGE'; payload: string }
   | { type: 'RESET_ALL' }
   | { type: 'RESET_FROM_STEP_4' };
 
@@ -26,6 +27,7 @@ const initialState: LearnerState = {
   scenarioData: null,
   rounds: [],
   summaryData: null,
+  characterImageUrl: null,
 };
 
 const LearnerContext = createContext<{
@@ -54,16 +56,17 @@ function learnerReducer(state: LearnerState, action: Action): LearnerState {
       return { ...state, scenarioData: action.payload };
     case 'SET_ROUNDS':
       return { ...state, rounds: action.payload };
-    case 'UPDATE_ROUND_ANSWER': {
-      const newRounds = [...state.rounds];
-      newRounds[action.payload.roundIndex] = {
-        ...newRounds[action.payload.roundIndex],
+    case 'UPDATE_ROUND_ANSWER':
+      const newRoundsForAnswer = [...state.rounds];
+      newRoundsForAnswer[action.payload.roundIndex] = {
+        ...newRoundsForAnswer[action.payload.roundIndex],
         selectedIndex: action.payload.selectedIndex,
       };
-      return { ...state, rounds: newRounds };
-    }
+      return { ...state, rounds: newRoundsForAnswer };
     case 'SET_SUMMARY':
       return { ...state, summaryData: action.payload };
+    case 'SET_CHARACTER_IMAGE':
+      return { ...state, characterImageUrl: action.payload };
     case 'RESET_ALL':
       return initialState;
     case 'RESET_FROM_STEP_4':
@@ -75,6 +78,7 @@ function learnerReducer(state: LearnerState, action: Action): LearnerState {
         scenarioData: null,
         rounds: [],
         summaryData: null,
+        characterImageUrl: null,
       };
     default:
       return state;

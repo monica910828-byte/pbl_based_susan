@@ -40,7 +40,10 @@ export function useGPT() {
         });
 
         if (!response.ok) {
-          throw new Error('OpenAI API 직접 호출에 실패했습니다.');
+          let errText = await response.text().catch(() => '');
+          let errData: any = {};
+          try { errData = JSON.parse(errText); } catch(e) {}
+          throw new Error(errData?.error?.message || errText || 'OpenAI API 직접 호출에 실패했습니다.');
         }
 
         const rawData = await response.json();

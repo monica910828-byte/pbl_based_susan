@@ -14,8 +14,8 @@ export function Step3_LevelResult() {
     });
 
     let assignedLevel: Level = '초급';
-    if (correctCount >= 4) assignedLevel = '고급';
-    else if (correctCount >= 2) assignedLevel = '중급';
+    if (correctCount >= 3) assignedLevel = '고급';
+    else if (correctCount === 2) assignedLevel = '중급';
 
     dispatch({ type: 'SET_LEVEL', payload: assignedLevel });
   }, [state.preTestQuestions, state.preTestAnswers, dispatch]);

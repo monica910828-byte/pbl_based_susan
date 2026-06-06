@@ -4,6 +4,8 @@ export type AgeGroup =
 export type StartupStage =
   '예비창업자' | '실무자' | '관리자' | '대표자';
 
+export type Gender = '남성' | '여성' | '선택안함';
+
 export type Level = '초급' | '중급' | '고급';
 
 export type Topic =
@@ -13,6 +15,7 @@ export interface LearnerInfo {
   name: string;
   ageGroup: AgeGroup;
   stage: StartupStage;
+  gender: Gender;
 }
 
 export interface PreTestQuestion {
@@ -30,6 +33,7 @@ export interface QuizRound {
   correctIndex: number;
   selectedIndex: number | null;
   feedback: string;
+  actionImageUrl?: string;
 }
 
 export interface ScenarioData {
@@ -56,4 +60,5 @@ export interface LearnerState {
   scenarioData: ScenarioData | null;
   rounds: QuizRound[];
   summaryData: SummaryData | null;
+  characterImageUrl: string | null;
 }
