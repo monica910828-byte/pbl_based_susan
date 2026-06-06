@@ -58,7 +58,7 @@ export function Step3_LevelResult() {
 
         <button
           onClick={() => dispatch({ type: 'SET_STEP', payload: 4 })}
-          className="bg-coral-400 text-white text-xl font-bold py-4 px-12 rounded-full hover:bg-coral-600 transition-all shadow-md hover:-translate-y-1"
+          className="bg-coral-400 text-white text-xl font-bold py-4 px-8 w-full sm:w-auto sm:px-12 rounded-full hover:bg-coral-600 transition-all shadow-md hover:-translate-y-1"
         >
           학습 시작하기
         </button>

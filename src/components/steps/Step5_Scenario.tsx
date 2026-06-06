@@ -84,7 +84,7 @@ export function Step5_Scenario() {
       <div className="text-center mt-10">
         <button
           onClick={() => dispatch({ type: 'SET_STEP', payload: 6 })}
-          className="bg-coral-400 text-white text-xl font-bold py-4 px-16 rounded-full hover:bg-coral-600 transition-all shadow-md hover:-translate-y-1"
+          className="bg-coral-400 text-white text-xl font-bold py-4 px-8 w-full sm:w-auto sm:px-16 rounded-full hover:bg-coral-600 transition-all shadow-md hover:-translate-y-1"
         >
           문제 해결 시작하기
         </button>

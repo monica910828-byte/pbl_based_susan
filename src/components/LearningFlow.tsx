@@ -36,18 +36,18 @@ export function LearningFlow() {
       <BubbleBackground />
       
       <header className="w-full bg-white bg-opacity-80 backdrop-blur-md sticky top-0 z-10 border-b-2 border-sea-100 mb-8">
-        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center space-x-3">
-            <span className="text-3xl text-sea-500">🐟</span>
-            <h1 className="text-2xl font-bold text-sea-600">수산식품 PBL 아카데미</h1>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 min-h-[4rem] py-2 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
+          <div className="flex items-center space-x-2 sm:space-x-3">
+            <span className="text-2xl sm:text-3xl text-sea-500">🐟</span>
+            <h1 className="text-lg sm:text-2xl font-bold text-sea-600">수산식품 PBL 아카데미</h1>
           </div>
-          <div className="flex items-center space-x-4">
-            <div className="text-sm font-bold text-text-muted bg-sea-50 px-4 py-2 rounded-full">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="text-xs sm:text-sm font-bold text-text-muted bg-sea-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full max-w-[150px] sm:max-w-none truncate">
               {state.learner ? `${state.learner.name}님 학습 중` : '학습 준비'}
             </div>
             <Link 
               to="/admin" 
-              className="flex items-center space-x-1 text-sm bg-coral-50 hover:bg-coral-100 text-coral-600 px-3 py-2 rounded-full font-bold transition-colors"
+              className="flex items-center space-x-1 text-xs sm:text-sm bg-coral-50 hover:bg-coral-100 text-coral-600 px-3 py-1.5 sm:py-2 rounded-full font-bold transition-colors"
               title="교사 모드 접속"
             >
               <GraduationCap size={16} />
