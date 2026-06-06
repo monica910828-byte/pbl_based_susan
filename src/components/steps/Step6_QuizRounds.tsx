@@ -128,9 +128,9 @@ export function Step6_QuizRounds() {
   if (showEndingScene) {
     return (
       <div className="w-full max-w-5xl mx-auto animate-fadeInUp">
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-sea-200 flex flex-col items-center justify-center bg-sea-50" style={{ aspectRatio: '16/10' }}>
-           <div className="z-10 bg-white/95 p-10 rounded-3xl text-center shadow-2xl max-w-lg border-4 border-amber-300 relative">
-              <div className="text-6xl mb-4">🎊🦀</div>
+        <div className="relative rounded-3xl shadow-2xl border-4 border-sea-200 flex flex-col items-center justify-center bg-sea-50 min-h-[500px] py-12 px-4">
+           <div className="z-10 bg-white/95 p-6 sm:p-10 rounded-3xl text-center shadow-2xl max-w-lg w-full border-4 border-amber-300 relative">
+              <div className="text-5xl sm:text-6xl mb-4">🎊🦀</div>
               <h2 className="text-4xl font-extrabold text-sea-600 mb-6">여정 완료!</h2>
               <p className="text-2xl font-bold text-gray-800 leading-relaxed mb-6">모든 문제를 훌륭히 해결했어요!</p>
               
@@ -210,8 +210,8 @@ export function Step6_QuizRounds() {
         ))}
 
         {/* 3번 거점에 어촌계장 (어업인) 이미지 (발이 거점에 닿도록 translate-y-full 적용) 
-            PC 화면에서는 배경 이미지에 이미 그려져 있으므로(md:hidden) 모바일에서만 강제 표시합니다. */}
-        <div className="absolute z-10 transform -translate-x-1/2 -translate-y-full mt-4 md:hidden" style={{ left: '85%', top: '55%' }}>
+            배경 잘림 현상 및 해상도 문제를 방지하기 위해 항상 강제 표시합니다. */}
+        <div className="absolute z-10 transform -translate-x-1/2 -translate-y-full mt-4" style={{ left: '85%', top: '55%' }}>
           <img src="/images/fisherperson.png" alt="어촌계장" className="h-24 sm:h-32 object-contain drop-shadow-xl" />
         </div>
 
