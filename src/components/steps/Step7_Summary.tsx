@@ -177,14 +177,23 @@ export function Step7_Summary() {
       </div>
 
       {isCompleted && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 animate-fadeIn">
-          <div className="bg-white rounded-3xl p-10 max-w-sm w-full text-center animate-fadeInUp">
+        <div 
+          className="fixed inset-0 flex items-center justify-center z-50 animate-fadeIn"
+          style={{ 
+            backgroundColor: '#87CEEB',
+            backgroundImage: 'url(/images/cute_seafood_bg.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
+          <div className="bg-white/95 backdrop-blur-md rounded-3xl p-10 max-w-sm w-full text-center animate-fadeInUp shadow-2xl border-4 border-white">
             <div className="text-6xl mb-4">🌟</div>
-            <h3 className="text-2xl font-bold mb-4">제출이 완료되었습니다!</h3>
-            <p className="text-text-muted mb-8">수고하셨습니다. 선생님이 결과를 확인할 수 있습니다.</p>
+            <h3 className="text-2xl font-bold mb-4 text-sea-700">제출이 완료되었습니다!</h3>
+            <p className="text-text-muted mb-8 font-medium">수고하셨습니다.<br/>선생님이 결과를 확인할 수 있습니다.</p>
             <button
               onClick={() => setIsCompleted(false)}
-              className="w-full bg-coral-400 text-white font-bold py-3 rounded-full hover:bg-coral-600"
+              className="w-full bg-coral-400 text-white font-bold py-3 rounded-full hover:bg-coral-600 shadow-md transition-all hover:-translate-y-1"
             >
               닫기
             </button>

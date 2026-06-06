@@ -242,8 +242,8 @@ export function Step6_QuizRounds() {
               {/* 메인 대화창 박스 */}
               <div className="relative bg-white/95 border-4 border-sea-300 rounded-2xl p-5 sm:p-8 backdrop-blur-md shadow-xl mx-2 sm:mx-0 mt-6">
                 {/* 진행자 태그 */}
-                <div className="absolute -top-5 left-6 bg-sea-500 text-white font-bold px-5 py-2 rounded-full border-2 border-white shadow-md text-base">
-                  진행자 어촌계장 ⚓
+                <div className="absolute -top-5 left-6 bg-white text-sea-800 font-extrabold px-5 py-2 rounded-full border-4 border-sea-400 shadow-md text-base flex items-center">
+                  <span className="mr-1">🎙️</span> 진행자 어촌계장 ⚓
                 </div>
                 
                 <div className="mt-2 text-gray-800 font-bold text-xl sm:text-2xl leading-relaxed min-h-[60px] whitespace-pre-wrap break-words">
