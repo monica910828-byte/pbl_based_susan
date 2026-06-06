@@ -12,7 +12,12 @@ export const submitLearningData = async (state: LearnerState) => {
     // 1. Prepare Payload
     const payload = {
       submittedAt: serverTimestamp(),
-      learner: state.learner,
+      learner: {
+        name: state.learner.name || '',
+        ageGroup: state.learner.ageGroup || '',
+        stage: state.learner.stage || '',
+        gender: state.learner.gender || '선택안함'
+      },
       preTestScore: state.preTestAnswers.filter((a, i) => a === state.preTestQuestions[i]?.correctIndex).length,
       level: state.level,
       topic: state.topic === '직접 입력' ? state.customTopic : state.topic,
@@ -20,13 +25,15 @@ export const submitLearningData = async (state: LearnerState) => {
       rounds: state.rounds.map(r => ({
         round: r.round,
         questionText: r.questionText,
-        selectedLabel: r.selectedIndex !== null ? r.options[r.selectedIndex].label : '',
-        selectedText: r.selectedIndex !== null ? r.options[r.selectedIndex].text : '',
+        selectedLabel: r.selectedIndex !== null ? r.options[r.selectedIndex]?.label : '',
+        selectedText: r.selectedIndex !== null ? r.options[r.selectedIndex]?.text : '',
         feedback: r.feedback,
+        actionImageUrl: r.actionImageUrl || null,
       })),
-      summary: state.summaryData.summary,
-      keyLearnings: state.summaryData.keyLearnings,
-      practicalTips: state.summaryData.practicalTips,
+      summary: state.summaryData.summary || '',
+      keyLearnings: state.summaryData.keyLearnings || [],
+      practicalTips: state.summaryData.practicalTips || [],
+      characterImageUrl: state.characterImageUrl || null,
       storageFilePath: '', // Will be updated later
     };
 
@@ -34,18 +41,17 @@ export const submitLearningData = async (state: LearnerState) => {
     const docRef = await addDoc(collection(db, 'submissions'), payload);
     const submissionId = docRef.id;
 
-    // 3. Upload JSON backup to Storage
-    const jsonString = JSON.stringify(payload, null, 2);
-    const storageRef = ref(storage, `submissions/${submissionId}.json`);
-    await uploadString(storageRef, jsonString, 'raw', { contentType: 'application/json' });
-    
-    // Optional: Get URL and update firestore (though path is often enough)
-    const url = await getDownloadURL(storageRef);
+    // 3. Upload JSON backup to Storage (Try-catch to prevent failure if only storage fails)
+    let url = '';
+    try {
+      const jsonString = JSON.stringify(payload, null, 2);
+      const storageRef = ref(storage, `submissions/${submissionId}.json`);
+      await uploadString(storageRef, jsonString, 'raw', { contentType: 'application/json' });
+      url = await getDownloadURL(storageRef);
+    } catch (storageErr) {
+      console.warn("Storage json backup upload failed, but firestore doc is created.", storageErr);
+    }
 
-    // Normally we'd update the document with the storage file path, but addDoc is fine for now
-    // A separate updateDoc call can be added if we strictly want storageFilePath in the DB.
-    // For simplicity, we just return success.
-    
     return { success: true, submissionId, url };
   } catch (error) {
     console.error('Submission failed:', error);
