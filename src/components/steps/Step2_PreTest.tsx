@@ -48,10 +48,6 @@ export function Step2_PreTest() {
     }
   };
 
-  if (loading || state.preTestQuestions.length === 0) {
-    return <LoadingSpinner message="학습자님을 위한 맞춤형 진단 테스트를 만들고 있어요..." />;
-  }
-
   if (error) {
     return (
       <div className="text-center p-8">
@@ -61,6 +57,10 @@ export function Step2_PreTest() {
         </button>
       </div>
     );
+  }
+
+  if (loading || state.preTestQuestions.length === 0) {
+    return <LoadingSpinner message="학습자님을 위한 맞춤형 진단 테스트를 만들고 있어요..." />;
   }
 
   const currentQuestion = state.preTestQuestions[currentIndex];

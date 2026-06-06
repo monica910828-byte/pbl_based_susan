@@ -96,10 +96,6 @@ export function Step6_QuizRounds() {
     return null;
   }
 
-  if (loading || (!activeQuestion && !showFeedback)) {
-    return <LoadingSpinner message={`라운드 ${currentRoundIndex + 1} 질문을 준비 중입니다...`} />;
-  }
-
   if (error && !showFeedback) {
     return (
       <div className="text-center p-8">
@@ -109,6 +105,10 @@ export function Step6_QuizRounds() {
         </button>
       </div>
     );
+  }
+
+  if (loading || (!activeQuestion && !showFeedback)) {
+    return <LoadingSpinner message={`라운드 ${currentRoundIndex + 1} 질문을 준비 중입니다...`} />;
   }
 
   const displayRoundNum = showFeedback ? currentRoundIndex : currentRoundIndex + 1;
