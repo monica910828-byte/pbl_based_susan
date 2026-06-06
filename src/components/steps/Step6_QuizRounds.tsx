@@ -225,7 +225,7 @@ export function Step6_QuizRounds() {
             
             {/* 이전 선택 상황 피드백(퀘스트 업데이트 느낌) */}
             {displayData.previousAnswerProsCons && !showFeedback && (
-               <div className="mb-4 bg-white/95 border-2 border-sea-300 rounded-2xl p-4 sm:p-5 text-sea-900 text-lg sm:text-xl backdrop-blur-md shadow-sm ml-4 mr-4">
+               <div className="mb-4 bg-white/95 border-2 border-sea-300 rounded-2xl p-4 sm:p-5 text-sea-900 text-lg sm:text-xl backdrop-blur-md shadow-sm mx-2 sm:mx-4 whitespace-pre-wrap break-words">
                  <span className="font-extrabold text-sea-600 mr-2">📌 이전 상황:</span>
                  <Typewriter text={displayData.previousAnswerProsCons} speed={10} />
                </div>
@@ -238,7 +238,7 @@ export function Step6_QuizRounds() {
                 진행자 어촌계장 ⚓
               </div>
               
-              <div className="mt-2 text-gray-800 font-bold text-xl sm:text-2xl leading-relaxed min-h-[60px]">
+              <div className="mt-2 text-gray-800 font-bold text-xl sm:text-2xl leading-relaxed min-h-[60px] whitespace-pre-wrap break-words">
                 {!showFeedback ? (
                   <Typewriter 
                     text={displayData.questionText} 
@@ -263,10 +263,10 @@ export function Step6_QuizRounds() {
                   <button
                     key={idx}
                     onClick={() => handleSelect(idx)}
-                    className="group relative bg-white/95 border-2 border-sea-200 hover:border-sea-400 hover:bg-sea-50 p-4 sm:p-5 rounded-xl text-left transition-all overflow-hidden shadow-sm hover:shadow-md"
+                    className="group relative bg-white/95 border-2 border-sea-200 hover:border-sea-400 hover:bg-sea-50 p-4 sm:p-5 rounded-xl text-left transition-all overflow-hidden shadow-sm hover:shadow-md flex items-start"
                   >
-                    <span className="relative z-10 text-sea-500 font-extrabold mr-3 text-xl">[{opt.label}]</span>
-                    <span className="relative z-10 text-gray-800 group-hover:text-sea-700 font-bold text-lg sm:text-xl">
+                    <span className="relative z-10 text-sea-500 font-extrabold mr-3 text-xl shrink-0">[{opt.label}]</span>
+                    <span className="relative z-10 text-gray-800 group-hover:text-sea-700 font-bold text-lg sm:text-xl break-words whitespace-pre-wrap flex-1">
                       {opt.text}
                     </span>
                   </button>
