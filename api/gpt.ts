@@ -1,8 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import OpenAI from 'openai';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 export const maxDuration = 60;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -12,6 +10,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const { systemPrompt, userPrompt, jsonMode = false } = req.body;
 
   try {
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o', // Proceeding with gpt-4o as requested by user
       messages: [
@@ -24,8 +23,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     res.status(200).json({ content: completion.choices[0].message.content });
-  } catch (error) {
+  } catch (error: any) {
     console.error('[GPT API Error]', error);
-    res.status(500).json({ error: 'GPT API 호출 실패' });
+    res.status(500).json({ error: error.message ? `API 오류: ${error.message}` : 'GPT API 호출 실패' });
   }
 }

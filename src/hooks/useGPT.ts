@@ -56,7 +56,8 @@ export function useGPT() {
         });
 
         if (!response.ok) {
-          throw new Error('GPT API(서버리스) 요청에 실패했습니다.');
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.error || `GPT API(서버리스) 요청에 실패했습니다. (${response.status})`);
         }
 
         data = await response.json();
