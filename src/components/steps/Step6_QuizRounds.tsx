@@ -135,9 +135,9 @@ export function Step6_QuizRounds() {
               <p className="text-2xl font-bold text-gray-800 leading-relaxed mb-6">모든 문제를 훌륭히 해결했어요!</p>
               
               {/* 캐릭터와 어업인이 만나는 합성 이미지 */}
-              <div className="flex items-end justify-center mb-6 space-x-4">
-                <img src={characterImageUrl} alt="My Character" className="h-40 w-auto object-contain drop-shadow-md" />
-                <img src="/images/fisherperson.png" alt="Fisherperson" className="h-48 w-auto object-contain drop-shadow-md" />
+              <div className="flex items-end justify-center mb-6 space-x-8">
+                <img src={characterImageUrl} alt="My Character" className="h-32 sm:h-40 w-auto object-contain animate-bounce" />
+                <img src="/images/fisherperson.png" alt="Fisher" className="h-32 sm:h-40 w-auto object-contain" />
               </div>
 
               <button 
@@ -169,7 +169,7 @@ export function Step6_QuizRounds() {
   const displayRoundNum = Math.min(state.rounds.length + 1, 3);
   const displayData = showFeedback ? currentRoundData : activeQuestion;
 
-  // RPG 맵 거점 노드 위치
+  // RPG 맵 거점 노드 위치 (다시 섬 위치로 복구)
   const nodes = [
     { left: '20%', top: '55%' }, // 1번 퀘스트 위치
     { left: '50%', top: '45%' }, // 2번 퀘스트 위치
@@ -188,9 +188,9 @@ export function Step6_QuizRounds() {
         <ProgressBar current={displayRoundNum} total={3} />
       </div>
 
-      {/* 2.5D RPG 여정 맵 컨테이너 (모바일에서 대화창이 잘리지 않도록 min-h 지정, aspect ratio 제거하여 높이 유동성 확보) */}
+      {/* 2.5D RPG 여정 맵 컨테이너 (캐릭터와 대화창이 겹치지 않도록 충분한 높이 확보) */}
       <div 
-        className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-sea-200 flex flex-col bg-cover bg-top min-h-[750px] md:min-h-[700px]" 
+        className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-sea-200 flex flex-col bg-cover bg-top min-h-[850px] sm:min-h-[950px]" 
         style={{ backgroundImage: 'url(/images/map_bg.png)' }}
       >
         
@@ -209,70 +209,79 @@ export function Step6_QuizRounds() {
           </div>
         ))}
 
-        {/* 캐릭터 이동 위치 시뮬레이션 */}
+        {/* 3번 거점에 어촌계장 (어업인) 이미지 (발이 거점에 닿도록 translate-y-full 적용) 
+            PC 화면에서는 배경 이미지에 이미 그려져 있으므로(md:hidden) 모바일에서만 강제 표시합니다. */}
+        <div className="absolute z-10 transform -translate-x-1/2 -translate-y-full mt-4 md:hidden" style={{ left: '85%', top: '55%' }}>
+          <img src="/images/fisherperson.png" alt="어촌계장" className="h-24 sm:h-32 object-contain drop-shadow-xl" />
+        </div>
+
+        {/* 캐릭터 이동 위치 시뮬레이션 (발이 거점에 닿도록 translate-y-full 적용) */}
         {characterImageUrl && (
           <div 
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-[1200ms] ease-in-out z-20 drop-shadow-2xl"
+            className="absolute transform -translate-x-1/2 -translate-y-full mt-4 transition-all duration-[1200ms] ease-in-out z-20 drop-shadow-2xl"
             style={{ left: currentPos.left, top: currentPos.top }}
           >
             <img src={characterImageUrl} alt="My Character" className={`h-24 sm:h-32 md:h-40 w-auto object-contain ${isMoving ? 'animate-bounce' : 'animate-pulse'}`} />
           </div>
         )}
 
-        {/* 하단 귀여운 대화창 영역 (절대위치가 아닌 문서 흐름에 두어 높이 자동 확장) */}
+        {/* 하단 귀여운 대화창 영역 */}
         {displayData && (
-          <div className="mt-auto w-full z-40 p-3 sm:p-6 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-24 sm:pt-32 relative">
-            
-            {/* 이전 선택 상황 피드백(퀘스트 업데이트 느낌) */}
-            {displayData.previousAnswerProsCons && !showFeedback && (
-               <div className="mb-4 bg-white/95 border-2 border-sea-300 rounded-2xl p-4 sm:p-5 text-sea-900 text-lg sm:text-xl backdrop-blur-md shadow-sm mx-2 sm:mx-4 whitespace-pre-wrap break-words">
-                 <span className="font-extrabold text-sea-600 mr-2">📌 이전 상황:</span>
-                 <Typewriter text={displayData.previousAnswerProsCons} speed={10} />
-               </div>
-            )}
-
-            {/* 메인 대화창 박스 */}
-            <div className="relative bg-white/95 border-4 border-sea-300 rounded-2xl p-5 sm:p-8 backdrop-blur-md shadow-xl mx-2 sm:mx-0">
-              {/* 진행자 태그 */}
-              <div className="absolute -top-5 left-6 bg-sea-500 text-white font-bold px-5 py-2 rounded-full border-2 border-white shadow-md text-base">
-                진행자 어촌계장 ⚓
-              </div>
+          <div className="mt-auto w-full z-40 bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-16 sm:pt-24 flex flex-col justify-end">
+            {/* 대화창 내부 스크롤 컨테이너 (대화창이 캐릭터를 덮지 않도록 최대 높이 제한) */}
+            <div className="max-h-[350px] sm:max-h-[380px] overflow-y-auto w-full p-3 sm:p-6 space-y-4">
               
-              <div className="mt-2 text-gray-800 font-bold text-xl sm:text-2xl leading-relaxed min-h-[60px] whitespace-pre-wrap break-words">
-                {!showFeedback ? (
-                  <Typewriter 
-                    text={displayData.questionText} 
-                    speed={25} 
-                    onComplete={() => setTypewriterDone(true)} 
-                  />
-                ) : (
-                  <div>
-                    <span className="text-sea-600 font-extrabold mb-3 block text-2xl">
-                      💡 계장님의 조언:
-                    </span>
-                    <Typewriter text={displayData.feedback} speed={25} />
-                  </div>
-                )}
-              </div>
-            </div>
+              {/* 이전 선택 상황 피드백(퀘스트 업데이트 느낌) */}
+              {displayData.previousAnswerProsCons && !showFeedback && (
+                 <div className="bg-white/95 border-2 border-sea-300 rounded-2xl p-4 sm:p-5 text-sea-900 text-lg sm:text-xl backdrop-blur-md shadow-sm mx-2 sm:mx-4 whitespace-pre-wrap break-words">
+                   <span className="font-extrabold text-sea-600 mr-2">📌 이전 상황:</span>
+                   <Typewriter text={displayData.previousAnswerProsCons} speed={10} />
+                 </div>
+              )}
 
-            {/* 선택지 영역 (타이핑이 끝난 후 표시되도록) */}
-            {!showFeedback && typewriterDone && (
-              <div className="mt-4 grid grid-cols-1 gap-3 animate-fadeInUp mx-2 sm:mx-0">
-                {displayData.options.map((opt: any, idx: number) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleSelect(idx)}
-                    className="group relative bg-white/95 border-2 border-sea-200 hover:border-sea-400 hover:bg-sea-50 p-4 sm:p-5 rounded-xl text-left transition-all overflow-hidden shadow-sm hover:shadow-md flex items-start"
-                  >
-                    <span className="relative z-10 text-sea-500 font-extrabold mr-3 text-xl shrink-0">[{opt.label}]</span>
-                    <span className="relative z-10 text-gray-800 group-hover:text-sea-700 font-bold text-lg sm:text-xl break-words whitespace-pre-wrap flex-1">
-                      {opt.text}
-                    </span>
-                  </button>
-                ))}
+              {/* 메인 대화창 박스 */}
+              <div className="relative bg-white/95 border-4 border-sea-300 rounded-2xl p-5 sm:p-8 backdrop-blur-md shadow-xl mx-2 sm:mx-0 mt-6">
+                {/* 진행자 태그 */}
+                <div className="absolute -top-5 left-6 bg-sea-500 text-white font-bold px-5 py-2 rounded-full border-2 border-white shadow-md text-base">
+                  진행자 어촌계장 ⚓
+                </div>
+                
+                <div className="mt-2 text-gray-800 font-bold text-xl sm:text-2xl leading-relaxed min-h-[60px] whitespace-pre-wrap break-words">
+                  {!showFeedback ? (
+                    <Typewriter 
+                      text={displayData.questionText} 
+                      speed={25} 
+                      onComplete={() => setTypewriterDone(true)} 
+                    />
+                  ) : (
+                    <div>
+                      <span className="text-sea-600 font-extrabold mb-3 block text-2xl">
+                        💡 계장님의 조언:
+                      </span>
+                      <Typewriter text={displayData.feedback} speed={25} />
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
+
+              {/* 선택지 영역 (타이핑이 끝난 후 표시되도록) */}
+              {!showFeedback && typewriterDone && (
+                <div className="grid grid-cols-1 gap-3 animate-fadeInUp mx-2 sm:mx-0">
+                  {displayData.options.map((opt: any, idx: number) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSelect(idx)}
+                      className="group relative bg-white/95 border-2 border-sea-200 hover:border-sea-400 hover:bg-sea-50 p-4 sm:p-5 rounded-xl text-left transition-all overflow-hidden shadow-sm hover:shadow-md flex items-start"
+                    >
+                      <span className="relative z-10 text-sea-500 font-extrabold mr-3 text-xl shrink-0">[{opt.label}]</span>
+                      <span className="relative z-10 text-gray-800 group-hover:text-sea-700 font-bold text-lg sm:text-xl break-words whitespace-pre-wrap flex-1">
+                        {opt.text}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* 피드백 완료 후 다음 라운드로 버튼 */}
             {showFeedback && (

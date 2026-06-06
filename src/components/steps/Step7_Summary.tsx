@@ -98,7 +98,7 @@ export function Step7_Summary() {
   const { summary, keyLearnings, practicalTips, encouragement } = state.summaryData;
 
   return (
-    <div className="w-full max-w-4xl mx-auto pb-12 animate-fadeInUp">
+    <div className="w-full max-w-4xl mx-auto pb-48 sm:pb-12 animate-fadeInUp">
       <h2 className="text-4xl font-bold text-center text-text-base mb-10 font-serif">🎉 학습 완료!</h2>
 
       <div className="bg-white rounded-3xl overflow-hidden shadow-soft mb-8">
@@ -148,29 +148,29 @@ export function Step7_Summary() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-center gap-4">
+      <div className="fixed sm:relative bottom-0 left-0 w-full sm:w-auto p-4 sm:p-0 bg-white/95 sm:bg-transparent backdrop-blur-sm sm:backdrop-blur-none border-t-2 sm:border-0 border-sea-100 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 z-40 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.1)] sm:shadow-none animate-fadeInUp">
         {!isCompleted ? (
           <button
             onClick={handleSubmit}
             disabled={submitting}
-            className="flex-1 max-w-xs bg-coral-400 text-white text-xl font-bold py-4 px-8 rounded-full hover:bg-coral-600 transition-all shadow-md hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full sm:flex-1 sm:max-w-xs bg-coral-400 text-white text-lg sm:text-xl font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-coral-600 transition-all shadow-md hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {submitting ? '제출 중...' : '📤 제출하기'}
           </button>
         ) : (
-          <div className="flex-1 max-w-xs bg-green-500 text-white text-xl font-bold py-4 px-8 rounded-full text-center shadow-md">
+          <div className="w-full sm:flex-1 sm:max-w-xs bg-green-500 text-white text-lg sm:text-xl font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-center shadow-md">
             ✅ 제출 완료
           </div>
         )}
         <button
           onClick={() => dispatch({ type: 'RESET_FROM_STEP_4' })}
-          className="flex-1 max-w-xs bg-white text-sea-600 border-2 border-sea-400 text-xl font-bold py-4 px-8 rounded-full hover:bg-sea-50 transition-all shadow-md"
+          className="w-full sm:flex-1 sm:max-w-xs bg-white text-sea-600 border-2 border-sea-400 text-lg sm:text-xl font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-sea-50 transition-all shadow-md"
         >
           🔄 다시 학습하기
         </button>
         <button
           onClick={() => dispatch({ type: 'RESET_ALL' })}
-          className="flex-1 max-w-xs bg-gray-100 text-gray-600 border-2 border-gray-300 text-xl font-bold py-4 px-8 rounded-full hover:bg-gray-200 transition-all shadow-md"
+          className="w-full sm:flex-1 sm:max-w-xs bg-gray-100 text-gray-600 border-2 border-gray-300 text-lg sm:text-xl font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full hover:bg-gray-200 transition-all shadow-md"
         >
           🏠 처음으로
         </button>
