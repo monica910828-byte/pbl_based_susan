@@ -26,7 +26,7 @@ export function Step6_QuizRounds() {
   }, [currentRoundIndex, showFeedback]);
 
   const generateRound = async () => {
-    if (!state.scenarioData || !state.level) return;
+    if (!state.scenarioData || !state.level || !state.learner) return;
 
     let previousRoundsHistory = '없음';
     if (state.rounds.length > 0) {
