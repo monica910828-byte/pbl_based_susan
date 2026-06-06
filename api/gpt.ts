@@ -3,6 +3,8 @@ import OpenAI from 'openai';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+export const maxDuration = 60;
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS setup if necessary, though Vercel handles standard routing if requested from same domain
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
