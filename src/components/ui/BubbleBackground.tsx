@@ -4,6 +4,8 @@ export function BubbleBackground() {
     <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden bg-[#FFFDF9]">
       <div className="absolute top-10 left-10 text-3xl opacity-50 animate-float" style={{ animationDelay: '0s' }}>☁️</div>
       <div className="absolute top-40 right-20 text-4xl opacity-40 animate-float" style={{ animationDelay: '1s' }}>🐟</div>
+      <div className="absolute top-1/3 left-10 text-4xl opacity-40 animate-float" style={{ animationDelay: '1.2s' }}>🐠</div>
+      <div className="absolute bottom-1/4 left-20 text-4xl opacity-40 animate-float flex items-center" style={{ animationDelay: '2.1s' }}>🦐</div>
       <div className="absolute bottom-20 left-1/4 text-5xl opacity-30 animate-float" style={{ animationDelay: '2s' }}>🐚</div>
       <div className="absolute top-1/2 right-1/3 text-4xl opacity-40 animate-float" style={{ animationDelay: '1.5s' }}>🦀</div>
       <div className="absolute bottom-1/3 right-10 text-3xl opacity-50 animate-float" style={{ animationDelay: '0.5s' }}>🦑</div>

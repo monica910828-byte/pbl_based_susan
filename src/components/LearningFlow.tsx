@@ -15,7 +15,7 @@ import { GraduationCap } from 'lucide-react';
 import { AudioPlayer } from './ui/AudioPlayer';
 
 export function LearningFlow() {
-  const { state } = useLearner();
+  const { state, dispatch } = useLearner();
 
   const renderStep = () => {
     switch (state.step) {
@@ -37,10 +37,22 @@ export function LearningFlow() {
       
       <header className="w-full bg-white bg-opacity-80 backdrop-blur-md sticky top-0 z-10 border-b-2 border-sea-100 mb-8">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 min-h-[4rem] py-2 flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
-          <div className="flex items-center space-x-2 sm:space-x-3">
+          <button 
+            onClick={() => {
+              if (state.step > 1) {
+                if (window.confirm('처음으로 돌아가시겠습니까? 진행 중인 학습 내용이 초기화됩니다.')) {
+                  dispatch({ type: 'RESET_ALL' });
+                }
+              } else {
+                dispatch({ type: 'RESET_ALL' });
+              }
+            }}
+            className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity text-left cursor-pointer"
+            title="처음으로 돌아가기"
+          >
             <span className="text-2xl sm:text-3xl text-sea-500">🐟</span>
             <h1 className="text-lg sm:text-2xl font-bold text-sea-600">수산식품 PBL 아카데미</h1>
-          </div>
+          </button>
           <div className="flex items-center space-x-2 sm:space-x-4">
             <div className="text-xs sm:text-sm font-bold text-text-muted bg-sea-50 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full max-w-[150px] sm:max-w-none truncate">
               {state.learner ? `${state.learner.name}님 학습 중` : '학습 준비'}
