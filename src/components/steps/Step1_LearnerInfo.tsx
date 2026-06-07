@@ -34,7 +34,7 @@ export function Step1_LearnerInfo() {
         </div>
         <h1 className="text-4xl font-extrabold text-sea-700 tracking-tight mb-2">수산식품 PBL 아카데미</h1>
         <p className="text-sm text-gray-500 max-w-xl mx-auto break-keep leading-relaxed bg-gray-50 p-3 rounded-lg border border-gray-100">
-          * 수산식품 PBL아카데미는 학습자의 성함(닉네임), 성별, 창업단계, 학습 수준 및 결과를 수집합니다. 수집한 정보는 학습을 위해서만 사용되며 학습목적 달성 후 완전히 폐기됩니다.
+          * 수산식품 PBL아카데미는 학습자의 성함(닉네임), 성별, 연령대, 창업단계, 학습 수준 및 결과를 수집합니다. 수집한 정보는 학습을 위해서만 사용되며 학습목적 달성 후 완전히 폐기됩니다.
         </p>
       </div>
       
