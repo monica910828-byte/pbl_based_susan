@@ -28,6 +28,10 @@ export function Step2_PreTest() {
 
     if (result && result.questions) {
       dispatch({ type: 'SET_PRE_TEST_QUESTIONS', payload: result.questions });
+    } else if (result && !result.questions) {
+      // JSON 파싱은 성공했으나, questions 배열이 없는 비정상 응답일 경우 에러 표시를 위해 화면 새로고침 유도
+      alert('AI가 올바르지 않은 형식으로 응답했습니다. 다시 시도해주세요.');
+      window.location.reload();
     }
   };
 

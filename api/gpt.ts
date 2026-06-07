@@ -18,7 +18,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         { role: 'user', content: userPrompt },
       ],
       response_format: jsonMode ? { type: 'json_object' } : { type: 'text' },
-      temperature: 0.7,
+      temperature: 1,
       max_tokens: 1500,
     });
 

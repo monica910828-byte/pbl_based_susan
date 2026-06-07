@@ -35,7 +35,7 @@ export function useGPT() {
               { role: 'user', content: request.userPrompt },
             ],
             response_format: request.jsonMode ? { type: 'json_object' } : { type: 'text' },
-            temperature: 0.7,
+            temperature: 1,
           }),
         });
 
@@ -67,7 +67,11 @@ export function useGPT() {
       }
       
       if (request.jsonMode) {
-        return JSON.parse(data.content);
+        let text = data.content.trim();
+        if (text.startsWith('```')) {
+          text = text.replace(/^```(?:json)?/, '').replace(/```$/, '').trim();
+        }
+        return JSON.parse(text);
       }
       return data.content;
     } catch (err: any) {
