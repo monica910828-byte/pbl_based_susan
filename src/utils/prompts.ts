@@ -17,7 +17,9 @@ export const getPreTestPrompt = (learner: LearnerInfo) => {
 
 export const getScenarioPrompt = (learner: LearnerInfo, level: Level, topic: Topic | string) => {
   return `이름: ${learner.name}, 연령대: ${learner.ageGroup}, 창업단계: ${learner.stage}, 수준: ${level}, 주제: ${topic}
-중요: 시나리오 내용과 배경 정보(context)에는 반드시 예산, 불량률, 매출액, 온도, 기간 등 구체적이고 객관적인 수치 데이터를 포함하여 현실감 있게 작성하세요.
+중요 사항:
+1. 시나리오 내용과 배경 정보(context)에는 반드시 예산, 불량률, 매출액, 온도, 기간 등 구체적이고 객관적인 수치 데이터를 포함하여 현실감 있게 작성하세요.
+2. 만약 학습자가 제시한 주제가 구체적인 고민이나 특정한 상황(직접 입력)일 경우, 학습자가 입력한 내용과 아주 밀접하게 연관된 문제를 시나리오의 핵심 문제(problemStatement)로 구성하여 제공하세요.
 {
   "scenario": "실제 업체 배경의 현실 문제 상황 (2~3 문단)",
   "problemStatement": "핵심 문제 요약 (1~2 문장)",
